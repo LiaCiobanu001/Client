@@ -1,3 +1,5 @@
+//fisier creat pentru stilizari 
+
 import React, {
     PropsWithChildren,
     createContext,

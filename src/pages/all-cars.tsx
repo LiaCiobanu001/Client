@@ -9,10 +9,10 @@ import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 import { useMemo } from "react";
 
-import { PropertyCard, CustomButton } from "components";
+import { CarCard, CustomButton } from "components";
 
-const AllProperties = () => {
-    const navigate = useNavigate();
+const AllCars = () => {
+    const navigate = useNavigate(); 
 
     const {
         tableQueryResult: { data, isLoading, isError },
@@ -26,14 +26,17 @@ const AllProperties = () => {
         setFilters,
     } = useTable();
 
-    const allProperties = data?.data ?? [];
+    const allCars = data?.data ?? [];
+
 
     const currentPrice = sorter.find((item) => item.field === "price")?.order;
 
+    //sortarea pretului descendet/ascendet
     const toggleSort = (field: string) => {
         setSorter([{ field, order: currentPrice === "asc" ? "desc" : "asc" }]);
     };
 
+    //cautare dupa titlu si tipul masini
     const currentFilterValues = useMemo(() => {
         const logicalFilters = filters.flatMap((item) =>
             "field" in item ? item : [],
@@ -43,8 +46,8 @@ const AllProperties = () => {
             title:
                 logicalFilters.find((item) => item.field === "title")?.value ||
                 "",
-            propertyType:
-                logicalFilters.find((item) => item.field === "propertyType")
+            carType:
+                logicalFilters.find((item) => item.field === "carType")
                     ?.value || "",
         };
     }, [filters]);
@@ -57,9 +60,9 @@ const AllProperties = () => {
             <Box mt="20px" sx={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
                 <Stack direction="column" width="100%">
                     <Typography fontSize={25} fontWeight={700} color="#11142d">
-                        {!allProperties.length
-                            ? "There are no properties"
-                            : "All Properties"}
+                        {!allCars.length
+                            ? "Nu este postată nici o mașină"
+                            : "Toate mașinile"}
                     </Typography>
                     <Box
                         mb={2}
@@ -76,17 +79,17 @@ const AllProperties = () => {
                             mb={{ xs: "20px", sm: 0 }}
                         >
                             <CustomButton
-                                title={`Sort price ${
+                                title={`Sortează preț ${
                                     currentPrice === "asc" ? "↑" : "↓"
                                 }`}
                                 handleClick={() => toggleSort("price")}
-                                backgroundColor="#475be8"
+                                backgroundColor="#6a1e21"
                                 color="#fcfcfc"
                             />
                             <TextField
                                 variant="outlined"
                                 color="info"
-                                placeholder="Search by title"
+                                placeholder="Caută după titlu"
                                 value={currentFilterValues.title}
                                 onChange={(e) => {
                                     setFilters([
@@ -107,12 +110,12 @@ const AllProperties = () => {
                                 required
                                 inputProps={{ "aria-label": "Without label" }}
                                 defaultValue=""
-                                value={currentFilterValues.propertyType}
+                                value={currentFilterValues.carType}
                                 onChange={(e) => {
                                     setFilters(
                                         [
                                             {
-                                                field: "propertyType",
+                                                field: "carType",
                                                 operator: "eq",
                                                 value: e.target.value,
                                             },
@@ -121,16 +124,16 @@ const AllProperties = () => {
                                     );
                                 }}
                             >
-                                <MenuItem value="">All</MenuItem>
+                                <MenuItem value="">Toate</MenuItem>
                                 {[
-                                    "Apartment",
-                                    "Villa",
-                                    "Farmhouse",
-                                    "Condos",
-                                    "Townhouse",
-                                    "Duplex",
-                                    "Studio",
-                                    "Chalet",
+                                    "Cabriolet",
+                                    "EstateCar",
+                                    "SUV",
+                                    "Saloon",
+                                    "SmallCar",
+                                    "SportCar",
+                                    "Minibus",
+                                    "Coupe",
                                 ].map((type) => (
                                     <MenuItem
                                         key={type}
@@ -151,33 +154,33 @@ const AllProperties = () => {
                 alignItems="center"
             >
                 <CustomButton
-                    title="Add Property"
-                    handleClick={() => navigate("/properties/create")}
-                    backgroundColor="#475be8"
+                    title="Adaugă mașină"
+                    handleClick={() => navigate("/cars/create")}
+                    backgroundColor="#6a1e21"
                     color="#fcfcfc"
                     icon={<Add />}
                 />
             </Stack>
 
             <Box mt="20px" sx={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
-                {allProperties?.map((property) => (
-                    <PropertyCard
-                        key={property._id}
-                        id={property._id}
-                        title={property.title}
-                        location={property.location}
-                        price={property.price}
-                        photo={property.photo}
+                {allCars?.map((car) => (
+                    <CarCard
+                        key={car._id}
+                        id={car._id}
+                        title={car.title}
+                        location={car.location}
+                        price={car.price}
+                        photo={car.photo}
                     />
                 ))}
             </Box>
 
-            {allProperties.length > 0 && (
-                <Box display="flex" gap={2} mt={3} flexWrap="wrap">
+            {allCars.length > 0 && (
+                <Box display="flex" gap={2} mt={3} flexWrap="wrap" >
                     <CustomButton
-                        title="Previous"
+                        title="Pagina precedentă"
                         handleClick={() => setCurrent((prev) => prev - 1)}
-                        backgroundColor="#475be8"
+                        backgroundColor="#6a1e21"
                         color="#fcfcfc"
                         disabled={!(current > 1)}
                     />
@@ -186,17 +189,18 @@ const AllProperties = () => {
                         alignItems="center"
                         gap="5px"
                     >
-                        Page{" "}
+                        Pagina{" "}
                         <strong>
                             {current} of {pageCount}
                         </strong>
                     </Box>
                     <CustomButton
-                        title="Next"
+                        title="Pagina următoare"
                         handleClick={() => setCurrent((prev) => prev + 1)}
-                        backgroundColor="#475be8"
+                        backgroundColor="#6a1e21"
                         color="#fcfcfc"
                         disabled={current === pageCount}
+                        
                     />
                     <Select
                         variant="outlined"
@@ -204,16 +208,16 @@ const AllProperties = () => {
                         displayEmpty
                         required
                         inputProps={{ "aria-label": "Without label" }}
-                        defaultValue={10}
+                        defaultValue={5}    
                         onChange={(e) =>
                             setPageSize(
-                                e.target.value ? Number(e.target.value) : 10,
+                                e.target.value ? Number(e.target.value) : 5,
                             )
                         }
                     >
-                        {[10, 20, 30, 40, 50].map((size) => (
+                        {[5, 10, 15, 20].map((size) => (
                             <MenuItem key={size} value={size}>
-                                Show {size}
+                                Arată {size}
                             </MenuItem>
                         ))}
                     </Select>
@@ -223,4 +227,4 @@ const AllProperties = () => {
     );
 };
 
-export default AllProperties;
+export default AllCars;

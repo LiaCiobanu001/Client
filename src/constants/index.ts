@@ -1,27 +1,29 @@
-export const propertyReferralsInfo = [
+// crearea datelor necesare pentru digital ads
+
+export const CarReferralsInfo = [
     {
         title: "Social Media",
         percentage: 64,
-        color: "#6C5DD3",
+        color: "#4e1c10",
     },
     {
-        title: "Marketplace",
+        title: "Pagini se vânzări",
         percentage: 40,
-        color: "#7FBA7A",
+        color: "#6a1e21",
     },
     {
-        title: "Websites",
+        title: "Site-uri web",
         percentage: 50,
-        color: "#FFCE73",
+        color: "#7b231b",
     },
     {
         title: "Digital Ads",
         percentage: 80,
-        color: "#FFA2C0",
+        color: "#9b1319",
     },
     {
-        title: "Others",
+        title: "Altele",
         percentage: 15,
-        color: "#F45252",
+        color: "#c52a21",
     },
 ];

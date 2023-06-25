@@ -2,11 +2,9 @@ import { useList } from "@refinedev/core";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-import { AgentCard } from "components";
+import { AgentMessage } from "components";
 
-const Agents = () => {
-    
-    //citire date din baza de date
+const Message = () => {
     const { data, isLoading, isError } = useList({ resource: "users" });
 
     const allAgents = data?.data ?? [];
@@ -17,7 +15,7 @@ const Agents = () => {
     return (
         <Box>
             <Typography fontSize={25} fontWeight={700} color="#11142d">
-                Toți dealerii
+                Trimite un mesaj către dealerul tău  
             </Typography>
 
             <Box
@@ -26,11 +24,10 @@ const Agents = () => {
                     display: "flex",
                     flexWrap: "wrap",
                     gap: "20px",
-                    backgroundColor: "#fcfcfc",
                 }}
             >
                 {allAgents.map((agent) => (
-                    <AgentCard
+                    <AgentMessage
                         key={agent._id}
                         id={agent._id}
                         name={agent.name}
@@ -42,6 +39,6 @@ const Agents = () => {
             </Box>
         </Box>
     );
-};
+}
 
-export default Agents;
+export default Message

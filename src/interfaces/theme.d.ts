@@ -1,11 +1,4 @@
-/*eslint-disable */
 import "@refinedev/mui";
-export interface CustomTheme {
-    // Add custom variables here like below:
-    // status: {
-    //   danger: string;
-    // };
-}
 
 declare module "@mui/material/styles" {
     // @ts-ignore

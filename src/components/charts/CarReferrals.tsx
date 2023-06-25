@@ -2,9 +2,10 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-import { propertyReferralsInfo } from "constants/index";
+import { CarReferralsInfo } from "constants/index";
 
-interface ProgressBarProps {
+interface ProgressBarProps 
+{
     title: string;
     percentage: number;
     color: string;
@@ -43,7 +44,7 @@ const ProgressBar = ({ title, percentage, color }: ProgressBarProps) => (
     </Box>
 );
 
-const PropertyReferrals = () => {
+const CarReferrals = () => {
     return (
         <Box
             p={4}
@@ -55,11 +56,11 @@ const PropertyReferrals = () => {
             borderRadius="15px"
         >
             <Typography fontSize={18} fontWeight={600} color="#11142d">
-                Property Referrals
+                Recomandările mașinilor
             </Typography>
 
             <Stack my="20px" direction="column" gap={4}>
-                {propertyReferralsInfo.map((bar) => (
+                {CarReferralsInfo.map((bar) => (
                     <ProgressBar key={bar.title} {...bar} />
                 ))}
             </Stack>
@@ -67,4 +68,4 @@ const PropertyReferrals = () => {
     );
 };
 
-export default PropertyReferrals;
+export default CarReferrals;

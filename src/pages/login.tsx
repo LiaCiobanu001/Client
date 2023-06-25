@@ -3,17 +3,23 @@ import { useLogin } from "@refinedev/core";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 
-import { yariga } from "../assets";
+import { logo1 } from "../assets";
 
 import { CredentialResponse } from "../interfaces/google";
 
 export const Login: React.FC = () => {
+
+    //API pentru autentificare
+    const REACT_APP_GOOGLE_CLIENT_ID = "964800013485-aavfjcm4rtot8t0lk9n0e0a96thqkghg.apps.googleusercontent.com";
+
     const { mutate: login } = useLogin<CredentialResponse>({
         v3LegacyAuthProviderCompatible: true,
     });
 
     const GoogleButton = (): JSX.Element => {
         const divRef = useRef<HTMLDivElement>(null);
+
+        const form = useRef();
 
         useEffect(() => {
             if (
@@ -27,7 +33,7 @@ export const Login: React.FC = () => {
             try {
                 window.google.accounts.id.initialize({
                     ux_mode: "popup",
-                    client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+                    client_id: REACT_APP_GOOGLE_CLIENT_ID,
                     callback: async (res: CredentialResponse) => {
                         if (res.credential) {
                             login(res);
@@ -42,10 +48,12 @@ export const Login: React.FC = () => {
             } catch (error) {
                 console.log(error);
             }
-        }, []); // you can also add your client id as dependency here
+        }, []); 
 
         return <div ref={divRef} />;
     };
+
+
 
     return (
         <Box component="div" sx={{ backgroundColor: "#FCFCFC" }}>
@@ -67,11 +75,12 @@ export const Login: React.FC = () => {
                         alignItems: "center",
                     }}
                 >
-                    <div>
-                        <img src={yariga} alt="Yariga Logo" />
+                    <div >
+                        <img src={logo1} alt="Logo" width="340px" />
                     </div>
                     <Box mt={4}>
                         <GoogleButton />
+
                     </Box>
                 </Box>
             </Container>

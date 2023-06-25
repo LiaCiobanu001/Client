@@ -9,6 +9,7 @@ import "index.css";
 const container = document.getElementById("root") as HTMLElement;
 const root = createRoot(container);
 
+//rutoarea aplicatiei
 root.render(
     <React.StrictMode>
         <App />

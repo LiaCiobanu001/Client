@@ -6,6 +6,7 @@ import { Profile } from "components";
 const AgentProfile = () => {
     const { id } = useParams();
 
+    //citire date din baza de date
     const { data, isLoading, isError } = useOne({
         resource: "users",
         id: id as string,
@@ -24,7 +25,7 @@ const AgentProfile = () => {
             name={myProfile.name}
             email={myProfile.email}
             avatar={myProfile.avatar}
-            properties={myProfile.allProperties}
+            cars={myProfile.allCars}
         />
     );
 };

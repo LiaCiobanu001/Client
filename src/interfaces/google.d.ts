@@ -69,6 +69,7 @@ export interface PromptMomentNotification {
 export interface RevocationResponse {
     successful: boolean;
     error: string;
+    
 }
 
 export interface Credential {

@@ -1,5 +1,5 @@
 import EmailOutlined from "@mui/icons-material/EmailOutlined";
-import LocationCity from "@mui/icons-material/LocationCity";
+import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
 import Phone from "@mui/icons-material/Phone";
 import Place from "@mui/icons-material/Place";
 import { useGetIdentity } from "@refinedev/core";
@@ -30,17 +30,20 @@ const InfoBar = ({ icon, name }: InfoBarProps) => (
     </Stack>
 );
 
+//crearea cardului pentru agent
 const AgentCard = ({
     id,
     name,
     email,
     avatar,
-    noOfProperties,
+    noOfCars,
 }: AgentCardProp) => {
+    //cautarea userului
     const { data: currentUser } = useGetIdentity({
         v3LegacyAuthProviderCompatible: true,
     });
 
+    //generarea linkului pentru fiecare user
     const generateLink = () => {
         if (currentUser.email === email) return "/my-profile";
 
@@ -89,7 +92,7 @@ const AgentCard = ({
                         {name}
                     </Typography>
                     <Typography fontSize={14} color="#808191">
-                        Real-Estate Agent
+                        Dealer de mașină
                     </Typography>
                 </Stack>
                 <Stack
@@ -103,17 +106,17 @@ const AgentCard = ({
                         icon={<EmailOutlined sx={{ color: "#808191" }} />}
                         name={email}
                     />
-                    <InfoBar
+                   { /*<InfoBar
                         icon={<Place sx={{ color: "#808191" }} />}
                         name="London"
                     />
                     <InfoBar
                         icon={<Phone sx={{ color: "#808191" }} />}
                         name="+502-3231-4141"
-                    />
+                    />*/}
                     <InfoBar
-                        icon={<LocationCity sx={{ color: "#808191" }} />}
-                        name={`${noOfProperties} Properties`}
+                        icon={<DirectionsCarFilledOutlinedIcon sx={{ color: "#808191" }} />}
+                        name={`${noOfCars} Mașini`}
                     />
                 </Stack>
             </Stack>

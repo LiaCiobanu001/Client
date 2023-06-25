@@ -13,11 +13,13 @@ import {
 } from "@refinedev/mui";
 import CssBaseline from "@mui/material/CssBaseline";
 import GlobalStyles from "@mui/material/GlobalStyles";
+
 import AccountCircleOutlined from "@mui/icons-material/AccountCircleOutlined";
 import ChatBubbleOutline from "@mui/icons-material/ChatBubbleOutline";
 import PeopleAltOutlined from "@mui/icons-material/PeopleAltOutlined";
 import StarOutlineRounded from "@mui/icons-material/StarOutlineRounded";
-import VillaOutlined from "@mui/icons-material/VillaOutlined";
+import DirectionsCarOutlinedIcon from '@mui/icons-material/DirectionsCarOutlined';
+import AnnouncementOutlinedIcon from '@mui/icons-material/AnnouncementOutlined';
 
 import dataProvider from "@refinedev/simple-rest";
 import routerProvider from "@refinedev/react-router-v6/legacy";
@@ -27,16 +29,20 @@ import { ColorModeContextProvider } from "contexts";
 import { CredentialResponse } from "interfaces/google";
 import { parseJwt } from "utils/parse-jwt";
 
+
 import {
     Login,
     Home,
     Agents,
     MyProfile,
-    PropertyDetails,
-    AllProperties,
-    CreateProperty,
+    CarDetails,
+    AllCars,
+    CreateCar,
     AgentProfile,
-    EditProperty,
+    EditCar,
+    Message,
+    Review,
+    Report,
 } from "pages";
 
 const axiosInstance = axios.create();
@@ -55,6 +61,7 @@ axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
 
 function App() {
     const authProvider: AuthProvider = {
+        //functia de login
         login: async ({ credential }: CredentialResponse) => {
             const profileObj = credential ? parseJwt(credential) : null;
 
@@ -91,6 +98,7 @@ function App() {
 
             return Promise.resolve();
         },
+        //functia de logout
         logout: () => {
             const token = localStorage.getItem("token");
 
@@ -124,9 +132,9 @@ function App() {
         },
     };
 
+
     return (
         <ColorModeContextProvider>
-            <GitHubBanner />
             <CssBaseline />
             <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
             <RefineSnackbarProvider>
@@ -137,35 +145,45 @@ function App() {
                     catchAll={<ErrorComponent />}
                     resources={[
                         {
-                            name: "properties",
-                            list: AllProperties,
-                            show: PropertyDetails,
-                            create: CreateProperty,
-                            edit: EditProperty,
-                            icon: <VillaOutlined />,
+                            name: "cars",
+                            options: { label: "Mașini" },
+                            list: AllCars,
+                            show: CarDetails,
+                            create: CreateCar,
+                            edit: EditCar,
+                            icon: <DirectionsCarOutlinedIcon />,
                         },
                         {
                             name: "agents",
+                            options: { label: "Dealeri" },
                             list: Agents,
                             show: AgentProfile,
                             icon: <PeopleAltOutlined />,
                         },
                         {
-                            name: "reviews",
-                            list: Home,
+                            name: "Recenzii",
+                            options: { label: "Recenzii" },
+                            list: Review,
                             icon: <StarOutlineRounded />,
                         },
                         {
-                            name: "messages",
-                            list: Home,
+                            name: "Mesaj",
+                            options: { label: "Mesaj" },
+                            list: Message,
                             icon: <ChatBubbleOutline />,
                         },
                         {
                             name: "my-profile",
-                            options: { label: "My Profile " },
+                            options: { label: "Profilul meu " },
                             list: MyProfile,
                             icon: <AccountCircleOutlined />,
                         },
+                        {
+                            name:"Raportare",
+                            options: {label:"Raportare"},
+                            list: Report,
+                            icon : <AnnouncementOutlinedIcon/>
+                        }
                     ]}
                     Title={Title}
                     Sider={Sider}

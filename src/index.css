@@ -1,9 +1,12 @@
+/* stilizari */
+
 * {
   font-family: 'Manrope', sans-serif !important;
 }
 
 a {
   text-decoration: none !important;
+  color: #fcfcfc !important;
 }
 
 .my_profile-bg {
@@ -17,7 +20,7 @@ a {
   margin-left: -64px;
 }
 
-.property_details-img {
+.car_details-img {
   width: 100%;
 }
 
@@ -32,7 +35,7 @@ a {
       margin-top: -64px;
   }
 
-  .property_details-img {
+  .car_details-img {
       width: 100%;
       height: auto;
   }

@@ -1,12 +1,14 @@
 import { ApexOptions } from "apexcharts";
 
+//informatii pentru grafice
+
 export const TotalRevenueSeries = [
     {
-        name: "Last Month",
+        name: "Luna trecută",
         data: [183, 124, 115, 85, 143, 143, 96],
     },
     {
-        name: "Running Month",
+        name: "Luna curentă",
         data: [95, 84, 72, 44, 108, 108, 47],
     },
 ];
@@ -18,7 +20,7 @@ export const TotalRevenueOptions: ApexOptions = {
             show: false,
         },
     },
-    colors: ["#475BE8", "#CFC8FF"],
+    colors: ["#7b231b", "#cecece"],
     plotOptions: {
         bar: {
             borderRadius: 4,
@@ -37,11 +39,11 @@ export const TotalRevenueOptions: ApexOptions = {
         width: 4,
     },
     xaxis: {
-        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+        categories: ["Ian", "Feb", "Mar", "Apr", "Mai", "Iun", "Iul"],
     },
     yaxis: {
         title: {
-            text: "$ (thousands)",
+            text: "$ (mii)",
         },
     },
     fill: {
@@ -54,7 +56,7 @@ export const TotalRevenueOptions: ApexOptions = {
     tooltip: {
         y: {
             formatter(val: number) {
-                return `$ ${val} thousands`;
+                return `$ ${val} mii`;
             },
         },
     },

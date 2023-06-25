@@ -4,9 +4,8 @@ import Place from "@mui/icons-material/Place";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-
-import { ProfileProps, PropertyProps } from "interfaces/common";
-import PropertyCard from "./PropertyCard";
+import { ProfileProps, CarProps } from "interfaces/common";
+import CarCard from "./CarCard";
 
 function checkImage(url: any) {
     const img = new Image();
@@ -14,10 +13,10 @@ function checkImage(url: any) {
     return img.width !== 0 && img.height !== 0;
 }
 
-const Profile = ({ type, name, avatar, email, properties }: ProfileProps) => (
+const Profile = ({ type, name, avatar, email, cars }: ProfileProps) => (
     <Box>
         <Typography fontSize={25} fontWeight={700} color="#11142D">
-            {type} Profile
+            {type} Profil
         </Typography>
 
         <Box mt="20px" borderRadius="15px" padding="20px" bgcolor="#FCFCFC">
@@ -76,7 +75,7 @@ const Profile = ({ type, name, avatar, email, properties }: ProfileProps) => (
                                     {name}
                                 </Typography>
                                 <Typography fontSize={16} color="#808191">
-                                    Realestate Agent
+                                    Dealer de mașini
                                 </Typography>
                             </Stack>
 
@@ -87,7 +86,7 @@ const Profile = ({ type, name, avatar, email, properties }: ProfileProps) => (
                                         fontWeight={500}
                                         color="#808191"
                                     >
-                                        Address
+                                        Adresa
                                     </Typography>
                                     <Box
                                         display="flex"
@@ -118,7 +117,7 @@ const Profile = ({ type, name, avatar, email, properties }: ProfileProps) => (
                                             fontWeight={500}
                                             color="#808191"
                                         >
-                                            Phone Number
+                                            Număr de telefon
                                         </Typography>
                                         <Box
                                             display="flex"
@@ -168,10 +167,11 @@ const Profile = ({ type, name, avatar, email, properties }: ProfileProps) => (
             </Box>
         </Box>
 
-        {properties.length > 0 && (
+        {/* afisarea masinilor user ului */}
+        {cars.length > 0 && (
             <Box mt={2.5} borderRadius="15px" padding="20px" bgcolor="#FCFCFC">
                 <Typography fontSize={18} fontWeight={600} color="#11142D">
-                    {type} Properties
+                   Mașini  {type} 
                 </Typography>
 
                 <Box
@@ -182,14 +182,14 @@ const Profile = ({ type, name, avatar, email, properties }: ProfileProps) => (
                         gap: 2.5,
                     }}
                 >
-                    {properties?.map((property: PropertyProps) => (
-                        <PropertyCard
-                            key={property._id}
-                            id={property._id}
-                            title={property.title}
-                            location={property.location}
-                            price={property.price}
-                            photo={property.photo}
+                    {cars?.map((car: CarProps) => (
+                        <CarCard
+                            key={car._id}
+                            id={car._id}
+                            title={car.title}
+                            location={car.location}
+                            price={car.price}
+                            photo={car.photo}
                         />
                     ))}
                 </Box>

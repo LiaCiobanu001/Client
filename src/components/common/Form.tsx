@@ -1,3 +1,4 @@
+
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import FormControl from "@mui/material/FormControl";
@@ -19,12 +20,13 @@ const Form = ({
     handleImageChange,
     formLoading,
     onFinishHandler,
-    propertyImage,
+    carImage,
 }: FormProps) => {
+
     return (
         <Box>
             <Typography fontSize={25} fontWeight={700} color="#11142d">
-                {type} a Property
+                {type} de mașină
             </Typography>
 
             <Box mt={2.5} borderRadius="15px" padding="20px" bgcolor="#fcfcfc">
@@ -47,14 +49,20 @@ const Form = ({
                                 color: "#11142d",
                             }}
                         >
-                            Enter property name
+                            Introdu numele mașinii
                         </FormHelperText>
-                        <TextField
+                        <TextField 
                             fullWidth
                             required
                             id="outlined-basic"
                             color="info"
                             variant="outlined"
+                            // limitarea casutelor
+                            onKeyPress={(e) => {
+                                if (e.key === "+" || e.key === "-" || e.key === "&" ||(/[!"@#$%^*()_=\[\]\\\{\}|`~:;'\"<,>.\/?]/.test(e.key))) {
+                                    e.preventDefault();
+                                  }
+                              }}
                             {...register("title", { required: true })}
                         />
                     </FormControl>
@@ -67,12 +75,12 @@ const Form = ({
                                 color: "#11142d",
                             }}
                         >
-                            Enter Description
+                            Introdu descrierea mașinii
                         </FormHelperText>
                         <TextareaAutosize
                             minRows={5}
                             required
-                            placeholder="Write description"
+                            placeholder="Scrie descrierea mașinii"
                             color="info"
                             style={{
                                 width: "100%",
@@ -97,7 +105,7 @@ const Form = ({
                                     color: "#11142d",
                                 }}
                             >
-                                Select Property Type
+                                Selectează tipul de mașină
                             </FormHelperText>
                             <Select
                                 variant="outlined"
@@ -105,19 +113,19 @@ const Form = ({
                                 displayEmpty
                                 required
                                 inputProps={{ "aria-label": "Without label" }}
-                                defaultValue="apartment"
-                                {...register("propertyType", {
+                                defaultValue="cabriolet"
+                                {...register("carType", {
                                     required: true,
                                 })}
                             >
-                                <MenuItem value="apartment">Apartment</MenuItem>
-                                <MenuItem value="villa">Villa</MenuItem>
-                                <MenuItem value="farmhouse">farmhouse</MenuItem>
-                                <MenuItem value="condos">Condos</MenuItem>
-                                <MenuItem value="townhouse">Townhouse</MenuItem>
-                                <MenuItem value="duplex">Duplex</MenuItem>
-                                <MenuItem value="studio">Studio</MenuItem>
-                                <MenuItem value="chalet">Chalet</MenuItem>
+                                <MenuItem value="cabriolet">Cabriolet</MenuItem>
+                                <MenuItem value="estatecar">Mașină Break</MenuItem>
+                                <MenuItem value="suv">SUV</MenuItem>
+                                <MenuItem value="saloon">Mașină Sedan</MenuItem>
+                                <MenuItem value="smallcar">Mașină mică</MenuItem>
+                                <MenuItem value="sportcar">Mașină sport</MenuItem>
+                                <MenuItem value="minibus">Minibus</MenuItem>
+                                <MenuItem value="coupe">Coupe</MenuItem>
                             </Select>
                         </FormControl>
                         <FormControl>
@@ -129,15 +137,21 @@ const Form = ({
                                     color: "#11142d",
                                 }}
                             >
-                                Enter property price
+                                Introdu prețul mașinii
                             </FormHelperText>
                             <TextField
                                 fullWidth
                                 required
                                 id="outlined-basic"
                                 color="info"
-                                type="number"
-                                variant="outlined"
+                                type="text"
+                                variant="outlined"  
+                            // limitarea casutelor
+                                onKeyPress={(e) => {
+                                    if (e.key === "+" || e.key === "-" || e.key === "&" ||(/[a-zA-Z!"@#$%^*()_=\[\]\\\{\}|`~:;'\"<,>.\/?]/.test(e.key))) {
+                                        e.preventDefault();
+                                      }
+                                  }}
                                 {...register("price", { required: true })}
                             />
                         </FormControl>
@@ -152,7 +166,7 @@ const Form = ({
                                 color: "#11142d",
                             }}
                         >
-                            Enter Location
+                            Introdu locația
                         </FormHelperText>
                         <TextField
                             fullWidth
@@ -160,6 +174,12 @@ const Form = ({
                             id="outlined-basic"
                             color="info"
                             variant="outlined"
+                            // limitarea casutelor
+                            onKeyPress={(e) => {
+                                if (e.key === "+" || e.key === "-" || e.key === "&" ||(/[!"@#$%^*()_=\[\]\\\{\}|`~:;'\"<,>.\/?]/.test(e.key))) {
+                                    e.preventDefault();
+                                  }
+                              }}
                             {...register("location", { required: true })}
                         />
                     </FormControl>
@@ -177,7 +197,7 @@ const Form = ({
                                 fontWeight={500}
                                 my="10px"
                             >
-                                Property Photo
+                                Poza mașinii
                             </Typography>
 
                             <Button
@@ -189,7 +209,7 @@ const Form = ({
                                     fontSize: 16,
                                 }}
                             >
-                                Upload *
+                                Încărcat imaginea *
                                 <input
                                     hidden
                                     accept="image/*"
@@ -207,14 +227,14 @@ const Form = ({
                             color="#808191"
                             sx={{ wordBreak: "break-all" }}
                         >
-                            {propertyImage?.name}
+                            {carImage?.name}
                         </Typography>
                     </Stack>
 
                     <CustomButton
                         type="submit"
-                        title={formLoading ? "Submitting..." : "Submit"}
-                        backgroundColor="#475be8"
+                        title={formLoading ? "Se încarcă..." : "Postează"}
+                        backgroundColor="#6a1e21"
                         color="#fcfcfc"
                     />
                 </form>

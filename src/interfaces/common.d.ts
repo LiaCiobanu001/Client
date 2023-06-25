@@ -1,3 +1,4 @@
+//props comune pentru aplicatie
 export interface CustomButtonProps {
     type?: string;
     title: string;
@@ -14,10 +15,10 @@ export interface ProfileProps {
     name: string;
     avatar: string;
     email: string;
-    properties: Array | undefined;
+    cars: Array | undefined;
 }
 
-export interface PropertyProps {
+export interface CarProps {
     _id: string;
     title: string;
     description: string;
@@ -39,5 +40,5 @@ export interface FormProps {
     handleSubmit: FormEventHandler<HTMLFormElement> | undefined;
     handleImageChange: (file) => void;
     onFinishHandler: (data: FieldValues) => Promise<void> | void;
-    propertyImage: { name: string; url: string };
+    carImage: { name: string; url: string };
 }

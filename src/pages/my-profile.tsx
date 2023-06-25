@@ -3,6 +3,7 @@ import { useGetIdentity, useOne } from "@refinedev/core";
 import { Profile } from "components";
 
 const MyProfile = () => {
+    //citere date din baza de date
     const { data: user } = useGetIdentity({
         v3LegacyAuthProviderCompatible: true,
     });
@@ -18,11 +19,11 @@ const MyProfile = () => {
 
     return (
         <Profile
-            type="My"
+            type="Mele"
             name={myProfile.name}
             email={myProfile.email}
             avatar={myProfile.avatar}
-            properties={myProfile.allProperties}
+            cars={myProfile.allCars}
         />
     );
 };

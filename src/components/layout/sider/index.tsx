@@ -10,7 +10,6 @@ import Collapse from "@mui/material/Collapse";
 import Tooltip from "@mui/material/Tooltip";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-
 import MuiList from "@mui/material/List";
 import ListOutlined from "@mui/icons-material/ListOutlined";
 import Logout from "@mui/icons-material/Logout";
@@ -193,11 +192,11 @@ export const Sider: typeof DefaultSider = ({ render }) => {
                                 "&.Mui-selected": {
                                     "&:hover": {
                                         backgroundColor: isSelected
-                                            ? "#1e36e8"
+                                            ? "#6a1e21"
                                             : "transparent",
                                     },
                                     backgroundColor: isSelected
-                                        ? "#475be8"
+                                        ? "#9b1319"
                                         : "transparent",
                                 },
                                 justifyContent: "center",
@@ -277,6 +276,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
                             noWrap: true,
                             fontSize: "16px",
                             fontWeight: selectedKey === "/" ? "bold" : "normal",
+                            color:"#808191"
                         }}
                     />
                 </ListItemButton>
@@ -374,7 +374,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
                     open={opened}
                     onClose={() => setOpened(false)}
                     ModalProps={{
-                        keepMounted: true, // Better open performance on mobile.
+                        keepMounted: true, 
                     }}
                     sx={{
                         display: { sm: "block", md: "none" },
@@ -432,13 +432,13 @@ export const Sider: typeof DefaultSider = ({ render }) => {
                     </Box>
                     <Button
                         sx={{
-                            background: "#475BE8",
+                            background: "#6a1e21",
                             color: "primary.contrastText",
                             textAlign: "center",
                             borderRadius: 0,
                             borderTop: "1px solid #ffffff1a",
                             "&:hover": {
-                                background: "#1e36e8",
+                                background: "#9b1319",
                             },
                         }}
                         fullWidth
@@ -455,7 +455,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
                         top: "64px",
                         left: "0px",
                         borderRadius: "0 6px 6px 0",
-                        bgcolor: "#475be8",
+                        bgcolor: "#6a1e21",
                         zIndex: 1199,
                         width: "36px",
                     }}

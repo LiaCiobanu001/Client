@@ -7,6 +7,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
 export const Header: React.FC = () => {
+    //citirea de date din baza de date
     const { data: user } = useGetIdentity({
         v3LegacyAuthProviderCompatible: true,
     });
@@ -17,7 +18,7 @@ export const Header: React.FC = () => {
             color="default"
             position="sticky"
             elevation={0}
-            sx={{ background: "#fcfcf" }}
+            sx={{ background: "#fcfcfc" }}
         >
             <Toolbar>
                 <Stack

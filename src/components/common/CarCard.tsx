@@ -6,20 +6,20 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Stack from "@mui/material/Stack";
+import { CarCardProps } from "interfaces/car";
 
-import { PropertyCardProps } from "interfaces/property";
-
-const PropertyCard = ({
+const CarCard = ({
     id,
     title,
     location,
     price,
     photo,
-}: PropertyCardProps) => {
+}: CarCardProps) => {
     return (
         <Card
             component={Link}
-            to={`/properties/show/${id}`}
+            // setarea path-ului
+            to={`/cars/show/${id}`}
             sx={{
                 maxWidth: "330px",
                 padding: "10px",
@@ -80,4 +80,4 @@ const PropertyCard = ({
     );
 };
 
-export default PropertyCard;
+export default CarCard;

@@ -11,6 +11,7 @@ const reportWebVitals = (onPerfEntry?: ReportHandler) => {
                 getTTFB(onPerfEntry);
             },
         );
+        
     }
 };
 

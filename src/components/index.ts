@@ -1,26 +1,25 @@
-// common
 import Profile from "./common/Profile";
-import PropertyCard from "./common/PropertyCard";
+import CarCard from "./common/CarCard";
 import CustomButton from "./common/CustomButton";
 
-// charts
 import PieChart from "./charts/PieChart";
-import PropertyReferrals from "./charts/PropertyReferrals";
+import CarReferrals from "./charts/CarReferrals";
 import TotalRevenue from "./charts/TotalRevenue";
 
-// agent
 import AgentCard from "./agent/AgentCard";
+import AgentMessage from "./agent/AgentMessage";
 
-// home
 import TopAgent from "./home/TopAgent";
 
 export {
     Profile,
-    PropertyCard,
+    CarCard,
     CustomButton,
     PieChart,
-    PropertyReferrals,
+    CarReferrals,
     TotalRevenue,
     AgentCard,
     TopAgent,
+    AgentMessage,
+    
 };

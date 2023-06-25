@@ -1,4 +1,5 @@
+//import al tuturor imaginilor necesare
 import logo from "./logo.svg";
-import yariga from "./yariga.svg";
+import logo1 from "./logo1.svg";
 
-export { logo, yariga };
+export { logo, logo1 };

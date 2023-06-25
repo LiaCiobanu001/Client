@@ -1,3 +1,4 @@
+//props pentru pie chart
 export interface PieChartProps {
     title: string;
     value: number;

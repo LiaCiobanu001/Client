@@ -2,7 +2,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { useDelete, useGetIdentity, useShow } from "@refinedev/core";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import ChatBubble from "@mui/icons-material/ChatBubble";
 import Delete from "@mui/icons-material/Delete";
 import Edit from "@mui/icons-material/Edit";
@@ -12,13 +12,14 @@ import Star from "@mui/icons-material/Star";
 
 import { CustomButton } from "components";
 
+// control imagine 
 function checkImage(url: any) {
     const img = new Image();
     img.src = url;
     return img.width !== 0 && img.height !== 0;
 }
 
-const PropertyDetails = () => {
+const CarDetails = () => {
     const navigate = useNavigate();
     const { data: user } = useGetIdentity({
         v3LegacyAuthProviderCompatible: true,
@@ -29,36 +30,37 @@ const PropertyDetails = () => {
 
     const { data, isLoading, isError } = queryResult;
 
-    const propertyDetails = data?.data ?? {};
+    const carDetails = data?.data ?? {};
 
     if (isLoading) {
         return <div>Loading...</div>;
     }
 
     if (isError) {
-        return <div>Something went wrong!</div>;
+        return <div>Ceva a mers greșit !</div>;
     }
 
-    const isCurrentUser = user.email === propertyDetails.creator.email;
+    const isCurrentUser = user.email === carDetails.creator.email;
 
-    const handleDeleteProperty = () => {
+    const handleDeleteCar = () => {
         const response = confirm(
-            "Are you sure you want to delete this property?",
+            "Ești sigur că dorești să ștergi această mașină ?",
         );
         if (response) {
             mutate(
                 {
-                    resource: "properties",
+                    resource: "cars",
                     id: id as string,
                 },
                 {
                     onSuccess: () => {
-                        navigate("/properties");
+                        navigate("/cars");
                     },
                 },
             );
         }
     };
+
 
     return (
         <Box
@@ -68,7 +70,7 @@ const PropertyDetails = () => {
             width="fit-content"
         >
             <Typography fontSize={25} fontWeight={700} color="#11142D">
-                Details
+                Detalii mașină
             </Typography>
 
             <Box
@@ -79,11 +81,11 @@ const PropertyDetails = () => {
             >
                 <Box flex={1} maxWidth={764}>
                     <img
-                        src={propertyDetails.photo}
-                        alt="property_details-img"
+                        src={carDetails.photo}
+                        alt="car_details-img"
                         height={546}
                         style={{ objectFit: "cover", borderRadius: "10px" }}
-                        className="property_details-img"
+                        className="car_details-img"
                     />
 
                     <Box mt="15px">
@@ -99,7 +101,7 @@ const PropertyDetails = () => {
                                 color="#11142D"
                                 textTransform="capitalize"
                             >
-                                {propertyDetails.propertyType}
+                                {/*{carDetails.carType}*/}
                             </Typography>
                             <Box>
                                 {[1, 2, 3, 4, 5].map((item) => (
@@ -125,7 +127,7 @@ const PropertyDetails = () => {
                                     mt="10px"
                                     color="#11142D"
                                 >
-                                    {propertyDetails.title}
+                                    {carDetails.title}
                                 </Typography>
                                 <Stack
                                     mt={0.5}
@@ -135,7 +137,7 @@ const PropertyDetails = () => {
                                 >
                                     <Place sx={{ color: "#808191" }} />
                                     <Typography fontSize={14} color="#808191">
-                                        {propertyDetails.location}
+                                        {carDetails.location}
                                     </Typography>
                                 </Stack>
                             </Box>
@@ -147,7 +149,7 @@ const PropertyDetails = () => {
                                     mt="10px"
                                     color="#11142D"
                                 >
-                                    Price
+                                    Prețul
                                 </Typography>
                                 <Stack
                                     direction="row"
@@ -157,16 +159,16 @@ const PropertyDetails = () => {
                                     <Typography
                                         fontSize={25}
                                         fontWeight={700}
-                                        color="#475BE8"
+                                        color="#6a1e21"
                                     >
-                                        ${propertyDetails.price}
+                                        ${carDetails.price}
                                     </Typography>
                                     <Typography
                                         fontSize={14}
                                         color="#808191"
                                         mb={0.5}
                                     >
-                                        for one day
+                                        {/*for one day*/}
                                     </Typography>
                                 </Stack>
                             </Box>
@@ -174,10 +176,10 @@ const PropertyDetails = () => {
 
                         <Stack mt="25px" direction="column" gap="10px">
                             <Typography fontSize={18} color="#11142D">
-                                Description
+                                Descriere
                             </Typography>
                             <Typography fontSize={14} color="#808191">
-                                {propertyDetails.description}
+                                {carDetails.description}
                             </Typography>
                         </Stack>
                     </Box>
@@ -208,8 +210,8 @@ const PropertyDetails = () => {
                         >
                             <img
                                 src={
-                                    checkImage(propertyDetails.creator.avatar)
-                                        ? propertyDetails.creator.avatar
+                                    checkImage(carDetails.creator.avatar)
+                                        ? carDetails.creator.avatar
                                         : "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png"
                                 }
                                 alt="avatar"
@@ -227,7 +229,7 @@ const PropertyDetails = () => {
                                     fontWeight={600}
                                     color="#11142D"
                                 >
-                                    {propertyDetails.creator.name}
+                                    {carDetails.creator.name}
                                 </Typography>
                                 <Typography
                                     mt="5px"
@@ -235,7 +237,7 @@ const PropertyDetails = () => {
                                     fontWeight={400}
                                     color="#808191"
                                 >
-                                    Agent
+                                    Dealer
                                 </Typography>
                             </Box>
 
@@ -251,7 +253,7 @@ const PropertyDetails = () => {
                                     fontWeight={400}
                                     color="#808191"
                                 >
-                                    North Carolina, USA
+                                    Carolina de Nord, USA
                                 </Typography>
                             </Stack>
 
@@ -261,8 +263,8 @@ const PropertyDetails = () => {
                                 fontWeight={600}
                                 color="#11142D"
                             >
-                                {propertyDetails.creator.allProperties.length}{" "}
-                                Properties
+                                {carDetails.creator.allCars.length}{" "}
+                                Mașini
                             </Typography>
                         </Stack>
 
@@ -274,8 +276,8 @@ const PropertyDetails = () => {
                             gap={2}
                         >
                             <CustomButton
-                                title={!isCurrentUser ? "Message" : "Edit"}
-                                backgroundColor="#475BE8"
+                                title={!isCurrentUser ? "Mesaj" : "Editare"}
+                                backgroundColor="#6a1e21"
                                 color="#FCFCFC"
                                 fullWidth
                                 icon={
@@ -284,13 +286,24 @@ const PropertyDetails = () => {
                                 handleClick={() => {
                                     if (isCurrentUser) {
                                         navigate(
-                                            `/properties/edit/${propertyDetails._id}`,
+                                            `/cars/edit/${carDetails._id}`,
                                         );
+                                    } else {
+                                        //    `${carDetails.creator.email}`
+                                        
+                                            const emailSubject = encodeURIComponent('Interesat de mașină');
+                                            const emailBody = encodeURIComponent(
+                                                `Bună ziua vă scriu referitor la mașina X, ar fi super să ne întâlnim pentru TEST DRIVE în data de zz.mm.yyyy ora hh:mm. Mersi mult, numai bine`
+                                            );
+                                            const mailtoLink = `mailto:${carDetails.creator.email}?subject=${emailSubject}&body=${emailBody}`;
+                                    
+                                            window.location.href = mailtoLink;
                                     }
+                                    
                                 }}
                             />
                             <CustomButton
-                                title={!isCurrentUser ? "Call" : "Delete"}
+                                title={!isCurrentUser ? "Sună" : "Șterge"}
                                 backgroundColor={
                                     !isCurrentUser ? "#2ED480" : "#d42e2e"
                                 }
@@ -298,33 +311,47 @@ const PropertyDetails = () => {
                                 fullWidth
                                 icon={!isCurrentUser ? <Phone /> : <Delete />}
                                 handleClick={() => {
-                                    if (isCurrentUser) handleDeleteProperty();
+                                    if (isCurrentUser) {
+                                        handleDeleteCar();
+                                    } else {
+                                        const messageLink = "https://web.whatsapp.com/send?phone=+40749660983&text=Bună ziua vă scriu referitor la mașina X, ar fi super să ne întâlnim pentru TEST DRIVE în data de zz.mm.yyyy ora hh:mm. Mersi mult, numai bine&app_absent=0";
+                                
+                                        window.open(messageLink, "_blank");
+                                        
+                                    }
                                 }}
                             />
                         </Stack>
                     </Stack>
 
                     <Stack>
-                        <img
-                            src="https://serpmedia.org/scigen/images/googlemaps-nyc-standard.png?crc=3787557525"
+
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55565170.29301636!2d-132.08532758867793!3d31.786060306224!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sStatele%20Unite%20ale%20Americii!5e0!3m2!1sro!2sro!4v1686922949436!5m2!1sro!2sro"
                             width="100%"
-                            height={306}
-                            style={{ borderRadius: 10, objectFit: "cover" }}
+                            height="306"
+                            frameBorder="0"
+                            style={{ border: 0, borderRadius: 10, objectFit: "cover" }}
+                            allowFullScreen
+                            aria-hidden="false"
+                            tabIndex={0}
                         />
+
+
+
                     </Stack>
 
-                    <Box>
+                    {/*<Box>
                         <CustomButton
                             title="Book Now"
-                            backgroundColor="#475BE8"
+                            backgroundColor="#6a1e21"
                             color="#FCFCFC"
                             fullWidth
                         />
-                    </Box>
+                    </Box>*/}
                 </Box>
             </Box>
         </Box>
     );
 };
 
-export default PropertyDetails;
+export default CarDetails;

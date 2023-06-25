@@ -4,17 +4,18 @@ import { useForm } from "@refinedev/react-hook-form";
 import { FieldValues } from "react-hook-form";
 import Form from "components/common/Form";
 
-const CreateProperty = () => {
+const EditCar = () => {
     const { data: user } = useGetIdentity({
         v3LegacyAuthProviderCompatible: true,
     });
-    const [propertyImage, setPropertyImage] = useState({ name: "", url: "" });
+    const [carImage, setCarImage] = useState({ name: "", url: "" });
     const {
         refineCore: { onFinish, formLoading },
         register,
         handleSubmit,
     } = useForm();
 
+    //incarcaree imagine
     const handleImageChange = (file: File) => {
         const reader = (readFile: File) =>
             new Promise<string>((resolve, reject) => {
@@ -24,32 +25,33 @@ const CreateProperty = () => {
             });
 
         reader(file).then((result: string) =>
-            setPropertyImage({ name: file?.name, url: result }),
+            setCarImage({ name: file?.name, url: result }),
         );
     };
 
+    // control prezente imagane
     const onFinishHandler = async (data: FieldValues) => {
-        if (!propertyImage.name) return alert("Please upload a property image");
+        if (!carImage.name) return alert("Please upload a car image");
 
         await onFinish({
             ...data,
-            photo: propertyImage.url,
+            photo: carImage.url,
             email: user.email,
         });
     };
 
     return (
         <Form
-            type="Edit"
+            type="Editare"
             register={register}
             onFinish={onFinish}
             formLoading={formLoading}
             handleSubmit={handleSubmit}
             handleImageChange={handleImageChange}
             onFinishHandler={onFinishHandler}
-            propertyImage={propertyImage}
+            carImage={carImage}
         />
     );
 };
 
-export default CreateProperty;
+export default EditCar;

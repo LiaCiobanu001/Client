@@ -1,3 +1,5 @@
+//props pentru masini
+
 import { BaseKey } from "@refinedev/core";
 
 export interface FormFieldProp {
@@ -8,12 +10,12 @@ export interface FormFieldProp {
 export interface FormValues {
     title: string;
     description: string;
-    propertyType: string;
+    carType: string;
     location: string;
     price: number | undefined;
 }
 
-export interface PropertyCardProps {
+export interface CarCardProps {
     id?: BaseKey | undefined;
     title: string;
     location: string;
